@@ -12,12 +12,31 @@ const animateSnake=function() {
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
+  collisionActionIfAny(head.getCoord());
   if(head.isSameCoordAs(food)) {
     snake.grow();
     createFood(numberOfRows,numberOfCols);
     drawFood(food);
   }
 }
+
+const collisionActionIfAny=function(coordinates){
+  if(didHeadHitWalls(coordinates)){
+    gameOverAction();
+  }
+};
+
+const gameOverAction=function(){
+  alert('game over');
+  location.reload();
+};
+
+const didHeadHitWalls=function(coordinates){
+  let xWallEdge=[0,120];
+  let yWallEdge=[0,60];
+  return xWallEdge.includes(coordinates[0]) || yWallEdge.includes(coordinates[1]);
+};
+
 
 const changeSnakeDirection=function(event) {
   switch (event.code) {
