@@ -88,7 +88,7 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
-  animator=setInterval(animateSnake,100);
+  animator=setInterval(animateSnake,140);
 }
 
 window.onload=startGame;
