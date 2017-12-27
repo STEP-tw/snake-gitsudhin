@@ -24,18 +24,20 @@ const animateSnake=function() {
 
 const collisionActionIfAny=function(head){
   if(didHeadHitWalls(head.getCoord()) || didHeadHitBody(head)){
+    clearInterval(animator);
     gameOverAction();
   }
 }
 
 const gameOverAction=function(){
-  alert('game over');
-  location.reload();
+  let table=document.getElementById('keys');
+  table.innerText='Game Over..click on the snake board to play again';
+  table.onclick=(event)=>{location.reload()};
 }
 
 const didHeadHitWalls=function(headCoord){
-  let xWallEdge=[0,120];
-  let yWallEdge=[0,60];
+  let xWallEdge=[-1,120];
+  let yWallEdge=[-1,60];
   return xWallEdge.includes(headCoord[0]) || yWallEdge.includes(headCoord[1]);
 }
 
