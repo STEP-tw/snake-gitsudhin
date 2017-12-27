@@ -12,7 +12,9 @@ const animateSnake=function() {
   paintBody(oldHead);
   unpaintSnake(oldTail);
   paintHead(head);
-  collisionActionIfAny(head.getCoord());
+
+  collisionActionIfAny(head);
+
   if(head.isSameCoordAs(food)) {
     snake.grow();
     createFood(numberOfRows,numberOfCols);
@@ -20,23 +22,29 @@ const animateSnake=function() {
   }
 }
 
-const collisionActionIfAny=function(coordinates){
-  if(didHeadHitWalls(coordinates)){
+const collisionActionIfAny=function(head){
+  if(didHeadHitWalls(head.getCoord()) || didHeadHitBody(head)){
     gameOverAction();
   }
-};
+}
 
 const gameOverAction=function(){
   alert('game over');
   location.reload();
-};
+}
 
-const didHeadHitWalls=function(coordinates){
+const didHeadHitWalls=function(headCoord){
   let xWallEdge=[0,120];
   let yWallEdge=[0,60];
-  return xWallEdge.includes(coordinates[0]) || yWallEdge.includes(coordinates[1]);
-};
+  return xWallEdge.includes(headCoord[0]) || yWallEdge.includes(headCoord[1]);
+}
 
+const didHeadHitBody=function(head){
+  function isByte(element){
+    return head.isSameCoordAs(element);
+  }
+  return snake.body.some(isByte);
+}
 
 const changeSnakeDirection=function(event) {
   switch (event.code) {
@@ -80,7 +88,7 @@ const startGame=function() {
   createFood(numberOfRows,numberOfCols);
   drawFood(food);
   addKeyListener();
-  animator=setInterval(animateSnake,140);
+  animator=setInterval(animateSnake,100);
 }
 
 window.onload=startGame;
