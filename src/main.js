@@ -24,15 +24,13 @@ const animateSnake=function() {
 
 const collisionActionIfAny=function(head){
   if(didHeadHitWalls(head.getCoord()) || didHeadHitBody(head)){
-    clearInterval(animator);
     gameOverAction();
   }
 }
 
 const gameOverAction=function(){
-  let table=document.getElementById('keys');
-  table.innerText='Game Over..click on the snake board to play again';
-  table.onclick=(event)=>{location.reload()};
+  alert('game over');
+  location.reload();
 }
 
 const didHeadHitWalls=function(headCoord){
