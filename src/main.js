@@ -36,8 +36,8 @@ const gameOverAction=function(){
 }
 
 const didHeadHitWalls=function(headCoord){
-  let xWallEdge=[-1,120];
-  let yWallEdge=[-1,60];
+  let xWallEdge=[0,numberOfCols];
+  let yWallEdge=[0,numberOfRows];
   return xWallEdge.includes(headCoord[0]) || yWallEdge.includes(headCoord[1]);
 }
 
